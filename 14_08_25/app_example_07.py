@@ -6,11 +6,14 @@ class User(BaseModel):
     email: EmailStr
 
     @field_validator('email')
-    def check_email_domain(cls, value):
-        allowed_domains = ['example.com', 'test.com']
-        email_domain = value.split('@')[-1]
-        if email_domain not in allowed_domains:
-            raise ValueError(f"Email must be from one of the following domains: {', '.join(allowed_domains)}")
+    def check_email_domain(cls, value: str):
+        # allowed_domains = ['example.com', 'test.com']
+        # email_domain = value.split('@')[-1]
+
+        email_domain = value.endswith('example.com') or value.endswith('test.com')
+        # if email_domain not in allowed_domains:
+        if not email_domain:
+            raise ValueError(f"Email must be from one of the following domains")
         return value
 
 
