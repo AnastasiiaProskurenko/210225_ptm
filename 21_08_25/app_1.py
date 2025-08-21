@@ -28,3 +28,7 @@ session.add_all(
     ]
 )
 session.commit()
+
+
+# with Session() as session:
+#    ...

@@ -17,14 +17,10 @@ class User(Base):
 
 
 with Session() as session:
-    user = session.query(User).get(100)
-    if user:
-        print(user.name, user.age)
-    else:
-        print('No data')
-    print('-' * 20)
-    users = session.query(User).all()
-    print(*users, sep='\n')
-    print('-' * 20)
-    users = session.query(User).filter(User.age > 23).all()
+    # | = or, & = and, ~ - not
+
+    users = session.query(User).filter(
+        (User.name.like('J%')) |
+        (User.age == 17)
+    ).all()
     print(*users, sep='\n')

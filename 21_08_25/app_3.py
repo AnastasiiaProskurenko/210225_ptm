@@ -17,14 +17,13 @@ class User(Base):
 
 
 with Session() as session:
-    user = session.query(User).get(100)
+    user = session.query(User).get(1)
     if user:
-        print(user.name, user.age)
-    else:
-        print('No data')
+        session.delete(user)
+        session.commit()
+
+        print('user deleted')
+
     print('-' * 20)
     users = session.query(User).all()
-    print(*users, sep='\n')
-    print('-' * 20)
-    users = session.query(User).filter(User.age > 23).all()
     print(*users, sep='\n')
